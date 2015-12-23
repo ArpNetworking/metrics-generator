@@ -25,6 +25,8 @@ import com.arpnetworking.metrics.generator.name.SpecifiedName;
 import com.arpnetworking.metrics.generator.schedule.ConstantTimeScheduler;
 import com.arpnetworking.metrics.generator.uow.UnitOfWorkGenerator;
 import com.arpnetworking.metrics.generator.uow.UnitOfWorkSchedule;
+import com.arpnetworking.steno.Logger;
+import com.arpnetworking.steno.LoggerFactory;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import net.sf.oval.constraint.Min;
@@ -33,8 +35,6 @@ import net.sf.oval.constraint.NotNull;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -73,7 +73,12 @@ public final class TestFileGenerator {
         }
 
         final long totalSampleCount = ((long) _uowCount) * _namesCount * _samplesCount;
-        LOGGER.info(String.format("Generating file; file=%s, expectedSamples=%d", _fileName.toAbsolutePath(), totalSampleCount));
+        LOGGER.info()
+                .setEvent("GeneratingFile")
+                .setMessage("Starting file generation")
+                .addData("file", _fileName.toAbsolutePath())
+                .addData("expectedSamples", totalSampleCount)
+                .log();
 
         final Duration duration = new Duration(_startTime, _endTime);
 
@@ -111,9 +116,17 @@ public final class TestFileGenerator {
         executor.execute();
         try {
             final BasicFileAttributes attributes = Files.readAttributes(_fileName, BasicFileAttributes.class);
-            LOGGER.info(String.format("Generation complete; size=%s", attributes.size()));
+            LOGGER.info()
+                    .setEvent("GenerationComplete")
+                .setMessage("Generation completed successfully")
+                .addData("size", attributes.size())
+                .log();
         } catch (final IOException e) {
-            LOGGER.warn("Unable to read attributes of generated file", e);
+            LOGGER.warn()
+                    .setEvent("GenerationComplete")
+                    .setMessage("Generation completed successfully but unable to read attributes of generated file")
+                .setThrowable(e)
+                .log();
         }
     }
 

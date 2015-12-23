@@ -23,13 +23,13 @@ import com.arpnetworking.metrics.generator.uow.UnitOfWorkGenerator;
 import com.arpnetworking.metrics.generator.uow.UnitOfWorkSchedule;
 import com.arpnetworking.metrics.generator.util.RealTimeExecutor;
 import com.arpnetworking.metrics.generator.util.TestFileGenerator;
+import com.arpnetworking.steno.Logger;
+import com.arpnetworking.steno.LoggerFactory;
 import com.google.common.collect.Lists;
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -70,7 +70,10 @@ public final class Generator {
                 generateTestFiles(mersenneTwister);
             }
         } catch (final IOException e) {
-            LOGGER.error("Error generating files", e);
+            LOGGER.error()
+                .setMessage("Error generating files")
+                .setThrowable(e)
+                .log();
         }
     }
 

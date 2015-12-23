@@ -37,7 +37,7 @@ Arp Networking Metrics Client  | Apache License 2           | https://github.com
 Findbugs Annotations           | LGPL                       | https://github.com/findbugsproject/findbugs
 Guava                          | Apache License 2           | https://code.google.com/p/guava-libraries/
 Joda Time                      | Apache License 2           | http://www.joda.org/joda-time/
-SLF4J                          | MIT                        | http://www.slf4j.org/
+LogbackSteno                   | Apache License 2           | https://github.com/ArpNetworking/logback-steno
 
 
 Notice
