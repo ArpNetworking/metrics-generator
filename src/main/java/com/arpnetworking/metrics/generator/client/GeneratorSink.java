@@ -59,7 +59,7 @@ public class GeneratorSink implements Sink {
         _wrapped = new TsdLogSink.Builder()
                 .setDirectory(file.getParent().toFile())
                 .setName(Files.getNameWithoutExtension(file.toString()))
-                .setExtension(Files.getFileExtension(file.toString()))
+                .setExtension("." + Files.getFileExtension(file.toString()))
                 .build();
         replaceFileAppender(_wrapped, outputPath);
     }
