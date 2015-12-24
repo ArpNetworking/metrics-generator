@@ -26,7 +26,7 @@ import com.arpnetworking.metrics.ch.qos.logback.core.FileAppender;
 // CHECKSTYLE.OFF: RegexpSingleline - These are included here for generation.
 import com.arpnetworking.metrics.com.arpnetworking.logback.StenoEncoder;
 // CHECKSTYLE.ON: RegexpSingleline
-import com.arpnetworking.metrics.impl.TsdLogSink;
+import com.arpnetworking.metrics.impl.StenoLogSink;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
@@ -56,7 +56,7 @@ public class GeneratorSink implements Sink {
     public GeneratorSink(final Path outputPath, final DateTime initialTime) {
         _time = initialTime;
         final Path file = outputPath.toAbsolutePath().normalize();
-        _wrapped = new TsdLogSink.Builder()
+        _wrapped = new StenoLogSink.Builder()
                 .setDirectory(file.getParent().toFile())
                 .setName(Files.getNameWithoutExtension(file.toString()))
                 .setExtension("." + Files.getFileExtension(file.toString()))
