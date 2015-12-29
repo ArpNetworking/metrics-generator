@@ -92,19 +92,16 @@ public final class TestFileGenerator {
         final UnitOfWorkGenerator uowGenerator = new UnitOfWorkGenerator(metricGenerators);
 
         final List<UnitOfWorkSchedule> schedules = Lists.newArrayList();
-        final long period = TimeUnit.NANOSECONDS.convert(duration.getMillis(), TimeUnit.MILLISECONDS) / _uowCount;
-        schedules.add(new UnitOfWorkSchedule(uowGenerator, new ConstantTimeScheduler(period)));
+        final long durationInNanos = TimeUnit.NANOSECONDS.convert(duration.getMillis(), TimeUnit.MILLISECONDS);
+        final long periodInNanos = durationInNanos / _uowCount;
+        schedules.add(new UnitOfWorkSchedule(uowGenerator, new ConstantTimeScheduler(periodInNanos)));
 
         final MetricGenerator canary = new ConstantMetricGenerator(5, new SpecifiedName(CANARY));
 
         // Special canary unit of work schedulers
         // Each UOW generator is guaranteed to be executed once
         final UnitOfWorkGenerator canaryUOW = new UnitOfWorkGenerator(Collections.singletonList(canary));
-        schedules.add(new UnitOfWorkSchedule(canaryUOW, new ConstantTimeScheduler(
-                duration.plus(Duration.standardHours(1)).toPeriod())));
-        schedules.add(new UnitOfWorkSchedule(canaryUOW, new ConstantTimeScheduler(
-                duration.plus(Duration.standardHours(2)).toPeriod())));
-
+        schedules.add(new UnitOfWorkSchedule(canaryUOW, new ConstantTimeScheduler(durationInNanos + periodInNanos)));
 
         final IntervalExecutor executor = new IntervalExecutor(
                 _startTime,
