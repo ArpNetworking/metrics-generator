@@ -14,6 +14,7 @@ Arp Networking Build Resources | Apache License 2           | https://github.com
 Arp Networking Parent Pom      | Apache License 2           | https://github.com/ArpNetworking/arpnetworking-parent-pom
 Checkstyle                     | LGPL 2                     | http://checkstyle.sourceforge.net/
 Jacoco                         | Eclipse Public License 1.0 | http://www.eclemma.org/jacoco/
+FindBugs                       | LGPL                       | http://findbugs.sourceforge.net/
 Maven                          | Apache License 2           | http://maven.apache.org/
 Maven Checkstyle Plugin        | Apache License 2           | https://maven.apache.org/plugins/maven-checkstyle-plugin/
 Maven Compiler Plugin          | Apache License 2           | https://maven.apache.org/plugins/maven-compiler-plugin/
