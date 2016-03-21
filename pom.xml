@@ -18,7 +18,7 @@
   <parent>
     <groupId>com.arpnetworking.build</groupId>
     <artifactId>arpnetworking-parent-pom</artifactId>
-    <version>1.0.18</version>
+    <version>1.0.19</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -128,22 +128,6 @@
               <mainClass>com.arpnetworking.metrics.generator.Generator</mainClass>
             </program>
           </programs>
-        </configuration>
-      </plugin>
-
-      <!-- There is a problem with suppression of regex check for shaded package imports in GeneratorSink.java;
-           this causes a NullPointerException in Checkstyle on 'mvn verify'. The problem does not present during
-           initial build or 'mvn clean verify'. The issue is captured here:
-
-           https://github.com/checkstyle/checkstyle/issues/2284
-      -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <configuration>
-          <excludes>
-            com/arpnetworking/metrics/generator/client/GeneratorSink.java
-          </excludes>
         </configuration>
       </plugin>
     </plugins>

@@ -22,8 +22,6 @@ import com.arpnetworking.metrics.Sink;
 import com.arpnetworking.metrics.ch.qos.logback.classic.LoggerContext;
 import com.arpnetworking.metrics.ch.qos.logback.classic.spi.ILoggingEvent;
 import com.arpnetworking.metrics.ch.qos.logback.core.FileAppender;
-// CHECKSTYLE.ON: RegexpSingleline
-// CHECKSTYLE.OFF: RegexpSingleline - These are included here for generation.
 import com.arpnetworking.metrics.com.arpnetworking.logback.StenoEncoder;
 // CHECKSTYLE.ON: RegexpSingleline
 import com.arpnetworking.metrics.impl.StenoLogSink;
