@@ -16,10 +16,9 @@
 package com.arpnetworking.metrics.generator.metric;
 
 import com.arpnetworking.metrics.Metrics;
+import com.arpnetworking.metrics.Units;
 import com.arpnetworking.metrics.generator.name.NameGenerator;
 import org.apache.commons.math3.random.RandomDataGenerator;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Generates a timer with a uniform distribution.
@@ -41,15 +40,12 @@ public class UniformMetricGenerator implements MetricGenerator {
         _generator = new RandomDataGenerator();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void generate(final Metrics metrics) {
         metrics.setTimer(
                 _nameGenerator.getName(),
                 Math.round(_generator.nextUniform(_min, _max, true)),
-                TimeUnit.MILLISECONDS);
+                Units.MILLISECOND);
     }
 
     private final double _min;

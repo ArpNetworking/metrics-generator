@@ -34,9 +34,6 @@ public class ConstantCountMetricGenerator implements MetricGenerator {
         _wrapped = wrapped;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void generate(final Metrics metrics) {
         for (int x = 0; x < _count; x++) {

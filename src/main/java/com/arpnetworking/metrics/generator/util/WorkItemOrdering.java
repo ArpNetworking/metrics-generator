@@ -25,9 +25,6 @@ import java.util.Comparator;
  */
 class WorkItemOrdering implements Comparator<WorkEntry>, Serializable {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int compare(final WorkEntry o1, final WorkEntry o2) {
         return Long.compare(o1.getCurrentValue(), o2.getCurrentValue());

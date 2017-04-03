@@ -39,9 +39,6 @@ public class GaussianCountMetricGenerator implements MetricGenerator {
         _generator = new RandomDataGenerator();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void generate(final Metrics metrics) {
         final int count = (int) _generator.nextGaussian(_mu, _sigma);

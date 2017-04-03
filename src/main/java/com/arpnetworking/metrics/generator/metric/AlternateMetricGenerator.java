@@ -16,9 +16,8 @@
 package com.arpnetworking.metrics.generator.metric;
 
 import com.arpnetworking.metrics.Metrics;
+import com.arpnetworking.metrics.Units;
 import com.arpnetworking.metrics.generator.name.NameGenerator;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Generates a timer that alternates between a high and a low value.
@@ -39,16 +38,13 @@ public class AlternateMetricGenerator implements MetricGenerator {
         _nameGenerator = nameGenerator;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void generate(final Metrics metrics) {
         _odd = !_odd;
         if (_odd) {
-            metrics.setTimer(_nameGenerator.getName(), (long) _high, TimeUnit.MILLISECONDS);
+            metrics.setTimer(_nameGenerator.getName(), (long) _high, Units.MILLISECOND);
         } else {
-            metrics.setTimer(_nameGenerator.getName(), (long) _low, TimeUnit.MILLISECONDS);
+            metrics.setTimer(_nameGenerator.getName(), (long) _low, Units.MILLISECOND);
         }
     }
 

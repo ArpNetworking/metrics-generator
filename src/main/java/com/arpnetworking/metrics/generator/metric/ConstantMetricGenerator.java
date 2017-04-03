@@ -16,9 +16,8 @@
 package com.arpnetworking.metrics.generator.metric;
 
 import com.arpnetworking.metrics.Metrics;
+import com.arpnetworking.metrics.Units;
 import com.arpnetworking.metrics.generator.name.NameGenerator;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Generates a metric sample with a constant value.
@@ -37,15 +36,12 @@ public class ConstantMetricGenerator implements MetricGenerator {
         _nameGenerator = nameGenerator;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void generate(final Metrics metrics) {
         metrics.setTimer(
                 _nameGenerator.getName(),
                 _value,
-                TimeUnit.MILLISECONDS);
+                Units.MILLISECOND);
     }
 
     private final long _value;

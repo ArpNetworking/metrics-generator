@@ -18,7 +18,7 @@
   <parent>
     <groupId>com.arpnetworking.build</groupId>
     <artifactId>arpnetworking-parent-pom</artifactId>
-    <version>1.0.27</version>
+    <version>1.0.29</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -40,9 +40,9 @@
   <developers>
     <developer>
       <id>brandonarp</id>
-      <email>brandonarp@gmail.com</email>
-      <organization>Arp Networking</organization>
-      <organizationUrl>http://www.arpnetworking.com</organizationUrl>
+      <email>brandon.arp@inscopemetrics.com</email>
+      <organization>Inscope Metrics</organization>
+      <organizationUrl>http://www.inscopemetrics.com</organizationUrl>
       <roles>
         <role>developer</role>
       </roles>
@@ -73,7 +73,8 @@
     <guava.version>18.0</guava.version>
     <joda.time.version>2.8.2</joda.time.version>
     <logback.steno.version>1.17.0</logback.steno.version>
-    <metrics.client.version>0.4.5</metrics.client.version>
+    <metrics.client.version>0.7.0</metrics.client.version>
+    <metrics.filesink.extra.version>0.7.0</metrics.filesink.extra.version>
     <oval.version>1.82</oval.version>
 
     <!-- Findbugs -->
@@ -144,6 +145,11 @@
       <groupId>com.arpnetworking.metrics</groupId>
       <artifactId>metrics-client</artifactId>
       <version>${metrics.client.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.arpnetworking.metrics.extras</groupId>
+      <artifactId>file-sink-extra</artifactId>
+      <version>${metrics.filesink.extra.version}</version>
     </dependency>
     <!-- Google -->
     <dependency>

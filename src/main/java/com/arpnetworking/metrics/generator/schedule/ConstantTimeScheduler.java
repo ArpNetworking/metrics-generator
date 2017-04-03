@@ -44,9 +44,6 @@ public class ConstantTimeScheduler implements Scheduler {
         _time = period;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long next(final long previousExecutionTime) {
         return previousExecutionTime + _time;

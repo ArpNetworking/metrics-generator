@@ -55,9 +55,6 @@ public class NameSetGenerator implements NameGenerator {
         _names = Lists.newArrayList(names);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getName() {
         return _names.get(_dataGenerator.nextInt(0, _names.size() - 1));
