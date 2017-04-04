@@ -33,9 +33,6 @@ public class SingleNameGenerator implements NameGenerator {
         _name = new RandomDataGenerator(generator).nextHexString(16);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getName() {
         return _name;

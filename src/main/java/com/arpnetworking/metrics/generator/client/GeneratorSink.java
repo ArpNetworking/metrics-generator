@@ -19,12 +19,12 @@ import com.arpnetworking.metrics.Event;
 import com.arpnetworking.metrics.Quantity;
 import com.arpnetworking.metrics.Sink;
 // CHECKSTYLE.OFF: RegexpSingleline - These are included here for generation.
-import com.arpnetworking.metrics.ch.qos.logback.classic.LoggerContext;
-import com.arpnetworking.metrics.ch.qos.logback.classic.spi.ILoggingEvent;
-import com.arpnetworking.metrics.ch.qos.logback.core.FileAppender;
-import com.arpnetworking.metrics.com.arpnetworking.logback.StenoEncoder;
+import com.arpnetworking.metrics.filesinkextra.shaded.ch.qos.logback.classic.LoggerContext;
+import com.arpnetworking.metrics.filesinkextra.shaded.ch.qos.logback.classic.spi.ILoggingEvent;
+import com.arpnetworking.metrics.filesinkextra.shaded.ch.qos.logback.core.FileAppender;
+import com.arpnetworking.metrics.filesinkextra.shaded.com.arpnetworking.logback.StenoEncoder;
 // CHECKSTYLE.ON: RegexpSingleline
-import com.arpnetworking.metrics.impl.StenoLogSink;
+import com.arpnetworking.metrics.impl.FileSink;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
@@ -54,7 +54,7 @@ public class GeneratorSink implements Sink {
     public GeneratorSink(final Path outputPath, final DateTime initialTime) {
         _time = initialTime;
         final Path file = outputPath.toAbsolutePath().normalize();
-        _wrapped = new StenoLogSink.Builder()
+        _wrapped = new FileSink.Builder()
                 .setDirectory(file.getParent().toFile())
                 .setName(Files.getNameWithoutExtension(file.toString()))
                 .setExtension("." + Files.getFileExtension(file.toString()))
@@ -66,9 +66,6 @@ public class GeneratorSink implements Sink {
         _time = time;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void record(final Event event) {
         final HashMap<String, String> modified = Maps.newHashMap(event.getAnnotations());
@@ -91,8 +88,8 @@ public class GeneratorSink implements Sink {
         try {
             final Field queryLoggerField = queryLogSink.getClass().getSuperclass().getDeclaredField("_metricsLogger");
             queryLoggerField.setAccessible(true);
-            final com.arpnetworking.metrics.ch.qos.logback.classic.Logger queryLogger =
-                    (com.arpnetworking.metrics.ch.qos.logback.classic.Logger) queryLoggerField.get(queryLogSink);
+            final com.arpnetworking.metrics.filesinkextra.shaded.ch.qos.logback.classic.Logger queryLogger =
+                    (com.arpnetworking.metrics.filesinkextra.shaded.ch.qos.logback.classic.Logger) queryLoggerField.get(queryLogSink);
 
             final Field contextField = queryLogSink.getClass().getSuperclass().getDeclaredField("_loggerContext");
             contextField.setAccessible(true);

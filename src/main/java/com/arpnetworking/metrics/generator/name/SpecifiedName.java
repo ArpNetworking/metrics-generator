@@ -30,9 +30,6 @@ public class SpecifiedName implements NameGenerator {
         _name = name;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getName() {
         return _name;
