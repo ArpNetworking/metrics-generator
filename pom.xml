@@ -67,22 +67,24 @@
 
   <properties>
     <!--Dependency versions-->
-    <commons.version>1.3.0</commons.version>
+    <commons.version>1.13.3</commons.version>
     <commons.math.version>3.4.1</commons.math.version>
     <findbugs.annotations.version>3.0.1</findbugs.annotations.version>
-    <guava.version>18.0</guava.version>
-    <joda.time.version>2.8.2</joda.time.version>
-    <logback.steno.version>1.17.0</logback.steno.version>
-    <metrics.client.version>0.7.0</metrics.client.version>
-    <metrics.filesink.extra.version>0.7.0</metrics.filesink.extra.version>
-    <oval.version>1.82</oval.version>
+    <guava.version>23.4-jre</guava.version>
+    <jackson.version>2.9.2</jackson.version>
+    <joda.time.version>2.9.9</joda.time.version>
+    <junit.version>4.12</junit.version>
+    <logback.steno.version>1.18.0</logback.steno.version>
+    <metrics.client.version>0.10.0</metrics.client.version>
+    <metrics.filesink.extra.version>0.8.0</metrics.filesink.extra.version>
+    <oval.version>1.90</oval.version>
 
     <!-- Findbugs -->
     <findbugs.exclude>${project.basedir}/findbugs.exclude.xml</findbugs.exclude>
 
     <!-- Code Coverage -->
-    <jacoco.check.line.coverage>0.0</jacoco.check.line.coverage>
-    <jacoco.check.branch.coverage>0.0</jacoco.check.branch.coverage>
+    <jacoco.check.line.coverage>0.55</jacoco.check.line.coverage>
+    <jacoco.check.branch.coverage>0.29</jacoco.check.branch.coverage>
   </properties>
 
   <build>
@@ -182,6 +184,19 @@
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>findbugs-annotations</artifactId>
       <version>${findbugs.annotations.version}</version>
+    </dependency>
+    <!-- Test -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

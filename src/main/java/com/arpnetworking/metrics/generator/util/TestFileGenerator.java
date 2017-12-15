@@ -69,7 +69,7 @@ public final class TestFileGenerator {
         try {
             Files.deleteIfExists(_fileName);
         } catch (final IOException e) {
-            throw Throwables.propagate(e);
+            throw new RuntimeException(e);
         }
 
         final long totalSampleCount = ((long) _uowCount) * _namesCount * _samplesCount;
@@ -152,7 +152,7 @@ public final class TestFileGenerator {
          * Public constructor.
          */
         public Builder() {
-            super(TestFileGenerator.class);
+            super(TestFileGenerator::new);
         }
 
         /**
