@@ -58,6 +58,8 @@ public class GeneratorSink implements Sink {
                 .setDirectory(file.getParent().toFile())
                 .setName(Files.getNameWithoutExtension(file.toString()))
                 .setExtension("." + Files.getFileExtension(file.toString()))
+                .setImmediateFlush(true)
+                .setAsync(false)
                 .build();
         replaceFileAppender(_wrapped, outputPath);
     }
@@ -84,21 +86,19 @@ public class GeneratorSink implements Sink {
         _appender.getEncoder().start();
     }
 
-    private void replaceFileAppender(final Sink queryLogSink, final Path outputPath) {
+    private void replaceFileAppender(final Sink fileSink, final Path outputPath) {
         try {
-            final Field queryLoggerField = queryLogSink.getClass().getSuperclass().getDeclaredField("_metricsLogger");
+            final Field queryLoggerField = fileSink.getClass().getSuperclass().getDeclaredField("_metricsLogger");
             queryLoggerField.setAccessible(true);
             final com.arpnetworking.metrics.filesinkextra.shaded.ch.qos.logback.classic.Logger queryLogger =
-                    (com.arpnetworking.metrics.filesinkextra.shaded.ch.qos.logback.classic.Logger) queryLoggerField.get(queryLogSink);
+                    (com.arpnetworking.metrics.filesinkextra.shaded.ch.qos.logback.classic.Logger) queryLoggerField.get(fileSink);
 
-            final Field contextField = queryLogSink.getClass().getSuperclass().getDeclaredField("_loggerContext");
+            final Field contextField = fileSink.getClass().getSuperclass().getDeclaredField("_loggerContext");
             contextField.setAccessible(true);
-            final LoggerContext loggerContext = (LoggerContext) contextField.get(queryLogSink);
+            final LoggerContext loggerContext = (LoggerContext) contextField.get(fileSink);
 
             final StenoEncoder encoder = new StenoEncoder();
             encoder.setContext(loggerContext);
-            encoder.setImmediateFlush(false);
-
 
             final FileAppender<ILoggingEvent> fileAppender = new FileAppender<>();
             fileAppender.setAppend(false);
@@ -106,6 +106,7 @@ public class GeneratorSink implements Sink {
             fileAppender.setName("hijacked-query-log");
             fileAppender.setContext(loggerContext);
             fileAppender.setEncoder(encoder);
+            fileAppender.setImmediateFlush(true);
 
             encoder.start();
             fileAppender.start();
@@ -115,7 +116,7 @@ public class GeneratorSink implements Sink {
             queryLogger.detachAppender("query-log-async");
             queryLogger.addAppender(fileAppender);
         } catch (final NoSuchFieldException | IllegalAccessException e) {
-            throw Throwables.propagate(e);
+            throw new RuntimeException(e);
         }
     }
 
