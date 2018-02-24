@@ -16,13 +16,14 @@
 package com.arpnetworking.metrics.generator.util;
 
 import com.arpnetworking.metrics.MetricsFactory;
-import com.arpnetworking.metrics.Sink;
 import com.arpnetworking.metrics.generator.client.GeneratorSink;
 import com.arpnetworking.metrics.generator.uow.UnitOfWorkSchedule;
 import com.arpnetworking.metrics.impl.TsdMetricsFactory;
-import org.joda.time.DateTime;
 
 import java.nio.file.Path;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -49,12 +50,12 @@ public class RealTimeExecutor {
             final String serviceName) {
         _generators = generators;
         _workEntries = new PriorityQueue<>(generators.size(), new WorkItemOrdering());
-        _modifyingSink = new GeneratorSink(outputPath, DateTime.now());
+        _modifyingSink = new GeneratorSink(outputPath, ZonedDateTime.now());
 
         _metricsFactory = new TsdMetricsFactory.Builder()
                 .setClusterName(clusterName)
                 .setServiceName(serviceName)
-                .setSinks(Collections.<Sink>singletonList(_modifyingSink))
+                .setSinks(Collections.singletonList(_modifyingSink))
                 .build();
     }
 
@@ -64,7 +65,7 @@ public class RealTimeExecutor {
     public void execute() {
         for (final UnitOfWorkSchedule generator : _generators) {
             final long unitStart = generator.getScheduler().next(
-                    TimeUnit.NANOSECONDS.convert(DateTime.now().getMillis(), TimeUnit.MILLISECONDS));
+                    TimeUnit.NANOSECONDS.convert(ZonedDateTime.now().toInstant().toEpochMilli(), TimeUnit.MILLISECONDS));
             _workEntries.add(new WorkEntry(generator, unitStart));
         }
         while (true) {
@@ -72,8 +73,10 @@ public class RealTimeExecutor {
                 break;
             }
             final WorkEntry entry = _workEntries.peek();
-            final DateTime executeTime = new DateTime(TimeUnit.MILLISECONDS.convert(entry.getCurrentValue(), TimeUnit.NANOSECONDS));
-            if (executeTime.isAfterNow()) {
+            final ZonedDateTime executeTime = ZonedDateTime.ofInstant(
+                    Instant.ofEpochMilli(TimeUnit.MILLISECONDS.convert(entry.getCurrentValue(), TimeUnit.NANOSECONDS)),
+                    ZoneOffset.UTC);
+            if (executeTime.isAfter(ZonedDateTime.now())) {
                 try {
                     Thread.sleep(10);
                 } catch (final InterruptedException ignored) {
@@ -83,7 +86,9 @@ public class RealTimeExecutor {
                 continue;
             }
             _workEntries.poll();
-            _modifyingSink.setTime(new DateTime(TimeUnit.MILLISECONDS.convert(entry.getCurrentValue(), TimeUnit.NANOSECONDS)));
+            _modifyingSink.setTime(ZonedDateTime.ofInstant(
+                    Instant.ofEpochMilli(TimeUnit.MILLISECONDS.convert(entry.getCurrentValue(), TimeUnit.NANOSECONDS)),
+                    ZoneOffset.UTC));
             entry.getSchedule().getGenerator().generate(_metricsFactory);
             final WorkEntry newEntry = new WorkEntry(
                     entry.getSchedule(),

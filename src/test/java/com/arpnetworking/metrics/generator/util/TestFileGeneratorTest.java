@@ -16,18 +16,19 @@
 package com.arpnetworking.metrics.generator.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
-import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.ZonedDateTime;
+import java.util.List;
+
 /**
- * Tests for the <code>FileGenerator</code> class.
+ * Tests for the {@code FileGenerator} class.
  *
  * @author Ville Koskela (ville dot koskela at inscopemetrics dot com)
  */
@@ -38,8 +39,12 @@ public final class TestFileGeneratorTest {
         final Path tempDir = Files.createTempDirectory("TestFileGeneratorTest");
         final Path tempFile = Files.createTempFile(tempDir, "test", ".tmp");
 
-        final DateTime start = DateTime.now().minusDays(1).hourOfDay().roundFloorCopy();
-        final DateTime stop = start.plusMinutes(10);
+        final ZonedDateTime start = ZonedDateTime.now().minusDays(1)
+                .withHour(0)
+                .withMinute(0)
+                .withSecond(0)
+                .withNano(0);
+        final ZonedDateTime stop = start.plusMinutes(10);
         final TestFileGenerator generator = new TestFileGenerator.Builder()
                 .setRandom(RANDOM)
                 .setUnitOfWorkCount(1)

@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
- * A default ordering for a <code>WorkEntry</code>.
+ * A default ordering for a {@code WorkEntry}.
  *
  * @author Brandon Arp (barp at groupon dot com)
  */

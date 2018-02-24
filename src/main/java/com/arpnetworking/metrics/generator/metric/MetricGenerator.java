@@ -18,7 +18,7 @@ package com.arpnetworking.metrics.generator.metric;
 import com.arpnetworking.metrics.Metrics;
 
 /**
- * Generates a metric on a <code>Metrics</code> object.
+ * Generates a metric on a {@code Metrics} object.
  *
  * @author Brandon Arp (barp at groupon dot com)
  */
@@ -26,7 +26,7 @@ public interface MetricGenerator {
     /**
      * Generates a metric.
      *
-     * @param metrics <code>Metrics</code> on which the metric will be generated.
+     * @param metrics {@code Metrics} on which the metric will be generated.
      */
-    void generate(final Metrics metrics);
+    void generate(Metrics metrics);
 }

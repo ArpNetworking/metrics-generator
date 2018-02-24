@@ -28,5 +28,5 @@ public interface Scheduler {
      * @param previousExecutionTime Previous execution time in nanoseconds.
      * @return Next execution time in nanoseconds.
      */
-    long next(final long previousExecutionTime);
+    long next(long previousExecutionTime);
 }

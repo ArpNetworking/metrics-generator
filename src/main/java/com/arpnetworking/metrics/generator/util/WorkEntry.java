@@ -18,7 +18,7 @@ package com.arpnetworking.metrics.generator.util;
 import com.arpnetworking.metrics.generator.uow.UnitOfWorkSchedule;
 
 /**
- * Represents work item in a scheduling <code>PriorityQueue</code>.
+ * Represents work item in a scheduling {@code PriorityQueue}.
  *
  * @author Brandon Arp (barp at groupon dot com)
  */
