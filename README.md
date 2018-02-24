@@ -118,15 +118,15 @@ Building
 --------
 
 Prerequisites:
-* [JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* _None_
 
 Building:
 
-    metrics-generator> ./mvnw verify
+    metrics-generator> ./jdk-wrapper.sh ./mvnw verify
 
 To use the local version you must first install it locally:
 
-    metrics-generator> ./mvnw install
+    metrics-generator> ./jdk-wrapper.sh ./mvnw install
 
 You can determine the version of the local build from the pom file.  Using the local version is intended only for testing or development.
 

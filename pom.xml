@@ -18,7 +18,7 @@
   <parent>
     <groupId>com.arpnetworking.build</groupId>
     <artifactId>arpnetworking-parent-pom</artifactId>
-    <version>1.0.31</version>
+    <version>1.1.4</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -49,9 +49,9 @@
     </developer>
     <developer>
       <id>villekoskela</id>
-      <email>vkoskela@groupon.com</email>
-      <organization>Groupon</organization>
-      <organizationUrl>http://www.groupon.com</organizationUrl>
+      <email>ville.koskela@inscopemetrics.com</email>
+      <organization>Inscope Metrics</organization>
+      <organizationUrl>http://www.inscopemetrics.com</organizationUrl>
       <roles>
         <role>developer</role>
       </roles>
@@ -67,12 +67,11 @@
 
   <properties>
     <!--Dependency versions-->
-    <commons.version>1.13.3</commons.version>
-    <commons.math.version>3.4.1</commons.math.version>
+    <commons.version>1.15.3</commons.version>
+    <commons.math.version>3.6.1</commons.math.version>
     <findbugs.annotations.version>3.0.1</findbugs.annotations.version>
     <guava.version>23.4-jre</guava.version>
     <jackson.version>2.9.2</jackson.version>
-    <joda.time.version>2.9.9</joda.time.version>
     <junit.version>4.12</junit.version>
     <logback.steno.version>1.18.0</logback.steno.version>
     <metrics.client.version>0.10.0</metrics.client.version>
@@ -98,12 +97,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
       </plugin>
-      <!-- See custom checkstyle plugin block below.
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
       </plugin>
-      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -164,11 +161,6 @@
       <groupId>com.arpnetworking.commons</groupId>
       <artifactId>commons</artifactId>
       <version>${commons.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-      <version>${joda.time.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>

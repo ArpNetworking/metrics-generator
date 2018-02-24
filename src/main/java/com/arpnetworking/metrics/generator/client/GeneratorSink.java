@@ -15,6 +15,7 @@
  */
 package com.arpnetworking.metrics.generator.client;
 
+// CHECKSTYLE.OFF: ImportOrder - The inline comments mess with import order.
 import com.arpnetworking.metrics.Event;
 import com.arpnetworking.metrics.Quantity;
 import com.arpnetworking.metrics.Sink;
@@ -25,15 +26,15 @@ import com.arpnetworking.metrics.filesinkextra.shaded.ch.qos.logback.core.FileAp
 import com.arpnetworking.metrics.filesinkextra.shaded.com.arpnetworking.logback.StenoEncoder;
 // CHECKSTYLE.ON: RegexpSingleline
 import com.arpnetworking.metrics.impl.FileSink;
-import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
+// CHECKSTYLE.ON: ImportOrder
 
 import java.lang.reflect.Field;
 import java.nio.file.Path;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class GeneratorSink implements Sink {
      * @param initialTime The time to use in the replacement.
      */
     @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE") // getParent() may return null
-    public GeneratorSink(final Path outputPath, final DateTime initialTime) {
+    public GeneratorSink(final Path outputPath, final ZonedDateTime initialTime) {
         _time = initialTime;
         final Path file = outputPath.toAbsolutePath().normalize();
         _wrapped = new FileSink.Builder()
@@ -64,15 +65,15 @@ public class GeneratorSink implements Sink {
         replaceFileAppender(_wrapped, outputPath);
     }
 
-    public void setTime(final DateTime time) {
+    public void setTime(final ZonedDateTime time) {
         _time = time;
     }
 
     @Override
     public void record(final Event event) {
         final HashMap<String, String> modified = Maps.newHashMap(event.getAnnotations());
-        modified.put("_start", _time.withZone(DateTimeZone.UTC).toString());
-        modified.put("_end", _time.withZone(DateTimeZone.UTC).toString());
+        modified.put("_start", _time.withZoneSameInstant(ZoneOffset.UTC).toString());
+        modified.put("_end", _time.withZoneSameInstant(ZoneOffset.UTC).toString());
         _wrapped.record(new TimeWarpEvent(modified, event));
     }
 
@@ -121,7 +122,7 @@ public class GeneratorSink implements Sink {
     }
 
     private FileAppender<ILoggingEvent> _appender;
-    private DateTime _time;
+    private ZonedDateTime _time;
     private final Sink _wrapped;
 
     private static final class TimeWarpEvent implements Event {

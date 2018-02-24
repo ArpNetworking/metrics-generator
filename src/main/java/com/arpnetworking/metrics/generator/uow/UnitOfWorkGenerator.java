@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 /**
- * Generates a unit of work from a <code>List</code> of <code>MetricGenerator</code>.
+ * Generates a unit of work from a {@code List} of <code>MetricGenerator</code>.
  *
  * @author Brandon Arp (barp at groupon dot com)
  */
@@ -31,7 +31,7 @@ public class UnitOfWorkGenerator {
     /**
      * Public constructor.
      *
-     * @param metricGenerators <code>List</code> of <code>MetricGenerator</code> to use to generate the unit of work.
+     * @param metricGenerators {@code List} of {@code MetricGenerator} to use to generate the unit of work.
      */
     public UnitOfWorkGenerator(final List<MetricGenerator> metricGenerators) {
         _metricGenerators = Lists.newArrayList(metricGenerators);
@@ -43,7 +43,7 @@ public class UnitOfWorkGenerator {
      * @param metricsFactory Metrics factory to generate the unit of work on.
      */
     public void generate(final MetricsFactory metricsFactory) {
-        try (final Metrics metrics = metricsFactory.create()) {
+        try (Metrics metrics = metricsFactory.create()) {
             for (final MetricGenerator generator : _metricGenerators) {
                 generator.generate(metrics);
             }

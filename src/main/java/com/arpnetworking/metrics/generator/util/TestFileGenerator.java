@@ -27,19 +27,18 @@ import com.arpnetworking.metrics.generator.uow.UnitOfWorkGenerator;
 import com.arpnetworking.metrics.generator.uow.UnitOfWorkSchedule;
 import com.arpnetworking.steno.Logger;
 import com.arpnetworking.steno.LoggerFactory;
-import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
 import net.sf.oval.constraint.Min;
 import net.sf.oval.constraint.NotEmpty;
 import net.sf.oval.constraint.NotNull;
 import org.apache.commons.math3.random.RandomGenerator;
-import org.joda.time.DateTime;
-import org.joda.time.Duration;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -80,7 +79,7 @@ public final class TestFileGenerator {
                 .addData("expectedSamples", totalSampleCount)
                 .log();
 
-        final Duration duration = new Duration(_startTime, _endTime);
+        final Duration duration = Duration.between(_startTime, _endTime);
 
         final List<MetricGenerator> metricGenerators = Lists.newArrayList();
         for (int x = 0; x < _namesCount; ++x) {
@@ -92,7 +91,7 @@ public final class TestFileGenerator {
         final UnitOfWorkGenerator uowGenerator = new UnitOfWorkGenerator(metricGenerators);
 
         final List<UnitOfWorkSchedule> schedules = Lists.newArrayList();
-        final long durationInNanos = TimeUnit.NANOSECONDS.convert(duration.getMillis(), TimeUnit.MILLISECONDS);
+        final long durationInNanos = TimeUnit.NANOSECONDS.convert(duration.toMillis(), TimeUnit.MILLISECONDS);
         final long periodInNanos = durationInNanos / _uowCount;
         schedules.add(new UnitOfWorkSchedule(uowGenerator, new ConstantTimeScheduler(periodInNanos)));
 
@@ -136,8 +135,8 @@ public final class TestFileGenerator {
     private final Integer _uowCount;
     private final Integer _namesCount;
     private final Integer _samplesCount;
-    private final DateTime _startTime;
-    private final DateTime _endTime;
+    private final ZonedDateTime _startTime;
+    private final ZonedDateTime _endTime;
     private final Path _fileName;
     private final String _clusterName;
     private final String _serviceName;
@@ -145,7 +144,7 @@ public final class TestFileGenerator {
     private static final Logger LOGGER = LoggerFactory.getLogger(TestFileGenerator.class);
 
     /**
-     * Builder for a <code>TestFileGenerator</code>.
+     * Builder for a {@code TestFileGenerator}.
      */
     public static class Builder extends OvalBuilder<TestFileGenerator> {
         /**
@@ -205,7 +204,7 @@ public final class TestFileGenerator {
          * @param startTime The start time
          * @return This builder.
          */
-        public Builder setStartTime(final DateTime startTime) {
+        public Builder setStartTime(final ZonedDateTime startTime) {
             _startTime = startTime;
             return this;
         }
@@ -216,7 +215,7 @@ public final class TestFileGenerator {
          * @param endTime The end time
          * @return This builder.
          */
-        public Builder setEndTime(final DateTime endTime) {
+        public Builder setEndTime(final ZonedDateTime endTime) {
             _endTime = endTime;
             return this;
         }
@@ -255,9 +254,9 @@ public final class TestFileGenerator {
         }
 
         /**
-         * Build the <code>TestFileGenerator</code>.
+         * Build the {@code TestFileGenerator}.
          *
-         * @return the new <code>TestFileGenerator</code>
+         * @return the new {@code TestFileGenerator}
          */
         @Override
         public TestFileGenerator build() {
@@ -273,9 +272,9 @@ public final class TestFileGenerator {
         @Min(1)
         private Integer _samplesCount;
         @NotNull
-        private DateTime _startTime;
+        private ZonedDateTime _startTime;
         @NotNull
-        private DateTime _endTime;
+        private ZonedDateTime _endTime;
         @NotNull
         private Path _fileName;
         @NotNull

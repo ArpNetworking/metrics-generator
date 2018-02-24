@@ -18,7 +18,7 @@ package com.arpnetworking.metrics.generator.uow;
 import com.arpnetworking.metrics.generator.schedule.Scheduler;
 
 /**
- * Holds a <code>UnitOfWorkGenerator</code> and a scheduler.
+ * Holds a {@code UnitOfWorkGenerator} and a scheduler.
  *
  * @author Brandon Arp (barp at groupon dot com)
  */

@@ -28,12 +28,12 @@ import com.arpnetworking.steno.LoggerFactory;
 import com.google.common.collect.Lists;
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -85,8 +85,12 @@ public final class Generator {
         final String clusterName = "MyPerformanceTestedCluster";
         final String serviceName = "MyPerformanceTestedService";
 
-        final DateTime start = DateTime.now().hourOfDay().roundFloorCopy();
-        final DateTime stop = start.plusMinutes(10);
+        final ZonedDateTime start = ZonedDateTime.now()
+                .withHour(0)
+                .withMinute(0)
+                .withSecond(0)
+                .withNano(0);
+        final ZonedDateTime stop = start.plusMinutes(10);
         for (final Integer uowCount : uowPerInterval) {
             for (final Integer namesCount : metricNamesPerUOW) {
                 for (final Integer samplesCount : metricSamplesPerUOW) {
@@ -119,7 +123,7 @@ public final class Generator {
         final UnitOfWorkGenerator uowGenerator = new UnitOfWorkGenerator(metricGenerators);
 
         final List<UnitOfWorkSchedule> schedules = Lists.newArrayList();
-        schedules.add(new UnitOfWorkSchedule(uowGenerator, new ConstantTimeScheduler(Period.millis(500))));
+        schedules.add(new UnitOfWorkSchedule(uowGenerator, new ConstantTimeScheduler(Duration.ofMillis(500))));
 
         //TODO(barp): The file name should come from command line args [ISSUE-1]
         final RealTimeExecutor executor = new RealTimeExecutor(

@@ -15,8 +15,7 @@
  */
 package com.arpnetworking.metrics.generator.schedule;
 
-import org.joda.time.Period;
-
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -31,8 +30,8 @@ public class ConstantTimeScheduler implements Scheduler {
      *
      * @param time The time interval for scheduling.
      */
-    public ConstantTimeScheduler(final Period time) {
-        _time = TimeUnit.NANOSECONDS.convert(time.toStandardDuration().getMillis(), TimeUnit.MILLISECONDS);
+    public ConstantTimeScheduler(final Duration time) {
+        _time = TimeUnit.NANOSECONDS.convert(time.toMillis(), TimeUnit.MILLISECONDS);
     }
 
     /**

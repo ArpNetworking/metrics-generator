@@ -16,13 +16,14 @@
 package com.arpnetworking.metrics.generator.util;
 
 import com.arpnetworking.metrics.MetricsFactory;
-import com.arpnetworking.metrics.Sink;
 import com.arpnetworking.metrics.generator.client.GeneratorSink;
 import com.arpnetworking.metrics.generator.uow.UnitOfWorkSchedule;
 import com.arpnetworking.metrics.impl.TsdMetricsFactory;
-import org.joda.time.DateTime;
 
 import java.nio.file.Path;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -46,14 +47,14 @@ public class IntervalExecutor {
      * @param serviceName The service to generate metrics for.
      */
     public IntervalExecutor(
-            final DateTime start,
-            final DateTime end,
+            final ZonedDateTime start,
+            final ZonedDateTime end,
             final List<UnitOfWorkSchedule> generators,
             final Path outputPath,
             final String clusterName,
             final String serviceName) {
-        final long nanoStart = TimeUnit.NANOSECONDS.convert(start.getMillis(), TimeUnit.MILLISECONDS);
-        _nanoEnd = TimeUnit.NANOSECONDS.convert(end.getMillis(), TimeUnit.MILLISECONDS);
+        final long nanoStart = TimeUnit.NANOSECONDS.convert(start.toInstant().toEpochMilli(), TimeUnit.MILLISECONDS);
+        _nanoEnd = TimeUnit.NANOSECONDS.convert(end.toInstant().toEpochMilli(), TimeUnit.MILLISECONDS);
         _workEntries = new PriorityQueue<>(generators.size(), new WorkItemOrdering());
         for (final UnitOfWorkSchedule generator : generators) {
             final long unitStart = generator.getScheduler().next(nanoStart);
@@ -63,7 +64,7 @@ public class IntervalExecutor {
         _metricsFactory = new TsdMetricsFactory.Builder()
                 .setClusterName(clusterName)
                 .setServiceName(serviceName)
-                .setSinks(Collections.<Sink>singletonList(_modifyingSink))
+                .setSinks(Collections.singletonList(_modifyingSink))
                 .build();
     }
 
@@ -71,9 +72,12 @@ public class IntervalExecutor {
      * Generates the data for the metrics interval.
      */
     public void execute() {
-        while (_workEntries.size() > 0) {
+        while (!_workEntries.isEmpty()) {
             final WorkEntry entry = _workEntries.poll();
-            _modifyingSink.setTime(new DateTime(TimeUnit.MILLISECONDS.convert(entry.getCurrentValue(), TimeUnit.NANOSECONDS)));
+            _modifyingSink.setTime(
+                    ZonedDateTime.ofInstant(
+                            Instant.ofEpochMilli(TimeUnit.MILLISECONDS.convert(entry.getCurrentValue(), TimeUnit.NANOSECONDS)),
+                            ZoneOffset.UTC));
             entry.getSchedule().getGenerator().generate(_metricsFactory);
             final WorkEntry newEntry = new WorkEntry(
                     entry.getSchedule(),
