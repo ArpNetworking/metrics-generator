@@ -19,6 +19,7 @@ import com.arpnetworking.metrics.Metrics;
 import com.arpnetworking.metrics.Units;
 import com.arpnetworking.metrics.generator.name.NameGenerator;
 import org.apache.commons.math3.random.RandomDataGenerator;
+import org.apache.commons.math3.random.RandomGenerator;
 
 /**
  * Generates a timer with a uniform distribution.
@@ -32,12 +33,13 @@ public class UniformMetricGenerator implements MetricGenerator {
      * @param min The minimum of the distribution.
      * @param max The maximum of the distribution.
      * @param nameGenerator The name generator to name the metric created.
+     * @param random Source for random
      */
-    public UniformMetricGenerator(final double min, final double max, final NameGenerator nameGenerator) {
+    public UniformMetricGenerator(final double min, final double max, final NameGenerator nameGenerator, final RandomGenerator random) {
         _min = min;
         _max = max;
         _nameGenerator = nameGenerator;
-        _generator = new RandomDataGenerator();
+        _generator = new RandomDataGenerator(random);
     }
 
     @Override

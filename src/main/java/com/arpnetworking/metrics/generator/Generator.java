@@ -118,7 +118,7 @@ public final class Generator {
     private void generateContinuous(final RandomGenerator mersenneTwister) {
         final List<MetricGenerator> metricGenerators = Lists.newArrayList();
         for (int x = 0; x < 5; x++) {
-            metricGenerators.add(new GaussianMetricGenerator(50d, 8d, new SingleNameGenerator(mersenneTwister)));
+            metricGenerators.add(new GaussianMetricGenerator(50d, 8d, new SingleNameGenerator(mersenneTwister), mersenneTwister));
         }
         final UnitOfWorkGenerator uowGenerator = new UnitOfWorkGenerator(metricGenerators);
 

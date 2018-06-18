@@ -19,6 +19,7 @@ import com.arpnetworking.metrics.Metrics;
 import com.arpnetworking.metrics.Units;
 import com.arpnetworking.metrics.generator.name.NameGenerator;
 import org.apache.commons.math3.random.RandomDataGenerator;
+import org.apache.commons.math3.random.RandomGenerator;
 
 /**
  * Generates a timer with a Gaussian distribution.
@@ -32,12 +33,13 @@ public class GaussianMetricGenerator implements MetricGenerator {
      * @param mu The mean of the distribution.
      * @param sigma The standard deviation of the distribution.
      * @param nameGenerator The name generator to name the metric created.
+     * @param random Source for random
      */
-    public GaussianMetricGenerator(final double mu, final double sigma, final NameGenerator nameGenerator) {
+    public GaussianMetricGenerator(final double mu, final double sigma, final NameGenerator nameGenerator, final RandomGenerator random) {
         _mu = mu;
         _sigma = sigma;
         _nameGenerator = nameGenerator;
-        _generator = new RandomDataGenerator();
+        _generator = new RandomDataGenerator(random);
     }
 
     @Override

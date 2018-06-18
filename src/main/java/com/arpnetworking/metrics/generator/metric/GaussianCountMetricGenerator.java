@@ -17,6 +17,7 @@ package com.arpnetworking.metrics.generator.metric;
 
 import com.arpnetworking.metrics.Metrics;
 import org.apache.commons.math3.random.RandomDataGenerator;
+import org.apache.commons.math3.random.RandomGenerator;
 
 /**
  * Generates a multiple number of metrics by decorating another generator,
@@ -31,12 +32,13 @@ public class GaussianCountMetricGenerator implements MetricGenerator {
      * @param mu Mean of the distribution.
      * @param sigma Standard deviation of the distribution.
      * @param wrapped The wrapped generator.
+     * @param random Source for random
      */
-    public GaussianCountMetricGenerator(final double mu, final double sigma, final MetricGenerator wrapped) {
+    public GaussianCountMetricGenerator(final double mu, final double sigma, final MetricGenerator wrapped, final RandomGenerator random) {
         _mu = mu;
         _sigma = sigma;
         _wrapped = wrapped;
-        _generator = new RandomDataGenerator();
+        _generator = new RandomDataGenerator(random);
     }
 
     @Override

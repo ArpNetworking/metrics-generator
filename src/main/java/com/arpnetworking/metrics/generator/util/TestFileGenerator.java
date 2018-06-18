@@ -84,7 +84,7 @@ public final class TestFileGenerator {
         final List<MetricGenerator> metricGenerators = Lists.newArrayList();
         for (int x = 0; x < _namesCount; ++x) {
             final GaussianMetricGenerator gaussian = new GaussianMetricGenerator(
-                    50d, 8d, new SingleNameGenerator(_random));
+                    50d, 8d, new SingleNameGenerator(_random), _random);
             final ConstantCountMetricGenerator sampleGenerator = new ConstantCountMetricGenerator(_samplesCount, gaussian);
             metricGenerators.add(sampleGenerator);
         }
