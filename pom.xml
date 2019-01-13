@@ -18,7 +18,7 @@
   <parent>
     <groupId>com.arpnetworking.build</groupId>
     <artifactId>arpnetworking-parent-pom</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.10</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -67,15 +67,16 @@
 
   <properties>
     <!--Dependency versions-->
-    <commons.version>1.15.3</commons.version>
+    <commons.version>1.18.0</commons.version>
     <commons.math.version>3.6.1</commons.math.version>
     <findbugs.annotations.version>3.0.1</findbugs.annotations.version>
-    <guava.version>23.4-jre</guava.version>
-    <jackson.version>2.9.2</jackson.version>
+    <guava.version>25.1-jre</guava.version>
+    <jackson.version>2.9.8</jackson.version>
+    <jsr305.version>3.0.2</jsr305.version>
     <junit.version>4.12</junit.version>
-    <logback.steno.version>1.18.0</logback.steno.version>
-    <metrics.client.version>0.10.0</metrics.client.version>
-    <metrics.filesink.extra.version>0.8.0</metrics.filesink.extra.version>
+    <logback.steno.version>1.18.2</logback.steno.version>
+    <metrics.client.version>0.10.1</metrics.client.version>
+    <metrics.filesink.extra.version>0.8.1</metrics.filesink.extra.version>
     <oval.version>1.90</oval.version>
 
     <!-- Findbugs -->
@@ -177,6 +178,11 @@
       <artifactId>findbugs-annotations</artifactId>
       <version>${findbugs.annotations.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>${jsr305.version}</version>
+    </dependency>
     <!-- Test -->
     <dependency>
       <groupId>junit</groupId>
@@ -189,6 +195,15 @@
       <artifactId>jackson-databind</artifactId>
       <version>${jackson.version}</version>
       <scope>test</scope>
+      <exclusions>
+        <!-- TODO(ville): Remove this exclusion once the annotations package is consistently depended upon:
+            https://github.com/FasterXML/jackson-bom/issues/15
+        -->
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 </project>
