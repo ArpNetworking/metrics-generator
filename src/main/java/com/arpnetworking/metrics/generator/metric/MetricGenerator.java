@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 Groupon.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,7 @@ package com.arpnetworking.metrics.generator.metric;
 import com.arpnetworking.metrics.Metrics;
 
 /**
- * Generates a metric on a {@code Metrics} object.
+ * Generates a metric on a {@link Metrics} object.
  *
  * @author Brandon Arp (barp at groupon dot com)
  */
@@ -26,7 +26,7 @@ public interface MetricGenerator {
     /**
      * Generates a metric.
      *
-     * @param metrics {@code Metrics} on which the metric will be generated.
+     * @param metrics {@link Metrics} on which the metric will be generated.
      */
     void generate(Metrics metrics);
 }

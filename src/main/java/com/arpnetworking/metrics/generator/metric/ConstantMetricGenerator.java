@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 Groupon.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +16,9 @@
 package com.arpnetworking.metrics.generator.metric;
 
 import com.arpnetworking.metrics.Metrics;
-import com.arpnetworking.metrics.Units;
 import com.arpnetworking.metrics.generator.name.NameGenerator;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Generates a metric sample with a constant value.
@@ -41,7 +42,7 @@ public class ConstantMetricGenerator implements MetricGenerator {
         metrics.setTimer(
                 _nameGenerator.getName(),
                 _value,
-                Units.MILLISECOND);
+                TimeUnit.MILLISECONDS);
     }
 
     private final long _value;

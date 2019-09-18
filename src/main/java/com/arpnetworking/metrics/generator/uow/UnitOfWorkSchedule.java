@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 Groupon.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,7 @@ package com.arpnetworking.metrics.generator.uow;
 import com.arpnetworking.metrics.generator.schedule.Scheduler;
 
 /**
- * Holds a {@code UnitOfWorkGenerator} and a scheduler.
+ * Holds a {@link UnitOfWorkGenerator} and a scheduler.
  *
  * @author Brandon Arp (barp at groupon dot com)
  */

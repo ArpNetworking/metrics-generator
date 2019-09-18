@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 Groupon.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 /**
- * Generates a unit of work from a {@code List} of <code>MetricGenerator</code>.
+ * Generates a unit of work from a {@link List} of {@link MetricGenerator}.
  *
  * @author Brandon Arp (barp at groupon dot com)
  */
@@ -31,7 +31,7 @@ public class UnitOfWorkGenerator {
     /**
      * Public constructor.
      *
-     * @param metricGenerators {@code List} of {@code MetricGenerator} to use to generate the unit of work.
+     * @param metricGenerators {@link List} of {@link MetricGenerator} to use to generate the unit of work.
      */
     public UnitOfWorkGenerator(final List<MetricGenerator> metricGenerators) {
         _metricGenerators = Lists.newArrayList(metricGenerators);

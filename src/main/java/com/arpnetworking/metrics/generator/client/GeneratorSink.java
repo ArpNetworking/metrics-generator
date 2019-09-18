@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 Groupon.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
 package com.arpnetworking.metrics.generator.client;
 
 // CHECKSTYLE.OFF: ImportOrder - The inline comments mess with import order.
+import com.arpnetworking.metrics.AggregatedData;
 import com.arpnetworking.metrics.Event;
 import com.arpnetworking.metrics.Quantity;
 import com.arpnetworking.metrics.Sink;
@@ -150,6 +151,11 @@ public class GeneratorSink implements Sink {
         @Override
         public Map<String, List<Quantity>> getGaugeSamples() {
             return _event.getGaugeSamples();
+        }
+
+        @Override
+        public Map<String, AggregatedData> getAggregatedData() {
+            return _event.getAggregatedData();
         }
 
         private final HashMap<String, String> _modified;

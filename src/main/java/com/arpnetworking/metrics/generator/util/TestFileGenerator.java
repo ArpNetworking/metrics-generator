@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 Groupon.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -144,7 +144,7 @@ public final class TestFileGenerator {
     private static final Logger LOGGER = LoggerFactory.getLogger(TestFileGenerator.class);
 
     /**
-     * Builder for a {@code TestFileGenerator}.
+     * Builder for a {@link TestFileGenerator}.
      */
     public static class Builder extends OvalBuilder<TestFileGenerator> {
         /**
@@ -254,9 +254,9 @@ public final class TestFileGenerator {
         }
 
         /**
-         * Build the {@code TestFileGenerator}.
+         * Build the {@link TestFileGenerator}.
          *
-         * @return the new {@code TestFileGenerator}
+         * @return the new {@link TestFileGenerator}
          */
         @Override
         public TestFileGenerator build() {
