@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 Groupon.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
- * A default ordering for a {@code WorkEntry}.
+ * A default ordering for a {@link WorkEntry}.
  *
  * @author Brandon Arp (barp at groupon dot com)
  */

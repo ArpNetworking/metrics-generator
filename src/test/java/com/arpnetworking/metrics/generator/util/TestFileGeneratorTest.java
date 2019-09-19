@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2017 Inscope Metrics Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Tests for the {@code FileGenerator} class.
  *
- * @author Ville Koskela (ville dot koskela at inscopemetrics dot com)
+ * @author Ville Koskela (ville dot koskela at inscopemetrics dot io)
  */
 public final class TestFileGeneratorTest {
 

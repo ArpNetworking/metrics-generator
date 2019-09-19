@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2014 Groupon.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +16,11 @@
 package com.arpnetworking.metrics.generator.metric;
 
 import com.arpnetworking.metrics.Metrics;
-import com.arpnetworking.metrics.Units;
 import com.arpnetworking.metrics.generator.name.NameGenerator;
 import org.apache.commons.math3.random.RandomDataGenerator;
 import org.apache.commons.math3.random.RandomGenerator;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Generates a timer with a uniform distribution.
@@ -47,7 +48,7 @@ public class UniformMetricGenerator implements MetricGenerator {
         metrics.setTimer(
                 _nameGenerator.getName(),
                 Math.round(_generator.nextUniform(_min, _max, true)),
-                Units.MILLISECOND);
+                TimeUnit.MILLISECONDS);
     }
 
     private final double _min;
