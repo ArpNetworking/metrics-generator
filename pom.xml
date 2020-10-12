@@ -72,7 +72,7 @@
     <guava.version>25.1-jre</guava.version>
     <jackson.version>2.9.8</jackson.version>
     <jsr305.version>3.0.2</jsr305.version>
-    <junit.version>4.13</junit.version>
+    <junit.version>4.13.1</junit.version>
     <logback.steno.version>1.18.2</logback.steno.version>
     <metrics.client.version>0.11.2</metrics.client.version>
     <metrics.filesink.extra.version>0.11.2</metrics.filesink.extra.version>
