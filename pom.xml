@@ -18,7 +18,7 @@
   <parent>
     <groupId>com.arpnetworking.build</groupId>
     <artifactId>arpnetworking-parent-pom</artifactId>
-    <version>2.0.5</version>
+    <version>3.0.10</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
@@ -67,21 +67,24 @@
 
   <properties>
     <!--Dependency versions-->
-    <commons.version>1.18.3</commons.version>
+    <commons.version>2.0.5</commons.version>
     <commons.math.version>3.6.1</commons.math.version>
-    <guava.version>25.1-jre</guava.version>
-    <jackson.version>2.9.8</jackson.version>
+    <guava.version>31.1-jre</guava.version>
+    <jackson.version>2.13.3</jackson.version>
     <jsr305.version>3.0.2</jsr305.version>
-    <junit.version>4.13</junit.version>
-    <logback.steno.version>1.18.2</logback.steno.version>
-    <metrics.client.version>0.11.2</metrics.client.version>
-    <metrics.filesink.extra.version>0.11.2</metrics.filesink.extra.version>
-    <oval.version>1.90</oval.version>
-    <spotbugs.annotations.version>4.0.3</spotbugs.annotations.version>
+    <junit.version>4.13.2</junit.version>
+    <logback.steno.version>1.19.0</logback.steno.version>
+    <metrics.client.version>0.12.1</metrics.client.version>
+    <metrics.filesink.extra.version>0.12.1</metrics.filesink.extra.version>
+    <oval.version>3.2.1</oval.version>
+    <spotbugs.annotations.version>4.7.1</spotbugs.annotations.version>
 
     <!-- Code Coverage -->
     <jacoco.check.line.coverage>0.55</jacoco.check.line.coverage>
     <jacoco.check.branch.coverage>0.29</jacoco.check.branch.coverage>
+
+    <!-- Findbugs -->
+    <spotbugs.exclude>${project.basedir}/spotbugs.exclude.xml</spotbugs.exclude>
   </properties>
 
   <build>
