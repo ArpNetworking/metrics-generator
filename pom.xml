@@ -28,7 +28,7 @@
   <name>Metrics Generator</name>
   <description>Library for generating metric samples.</description>
   <url>https://github.com/ArpNetworking/metrics-generator</url>
-  <version>1.4.0</version>
+  <version>1.4.1-SNAPSHOT</version>
 
   <licenses>
     <license>
@@ -62,7 +62,7 @@
     <connection>scm:git:git@github.com:arpnetworking/metrics-generator.git</connection>
     <developerConnection>scm:git:git@github.com:arpnetworking/metrics-generator.git</developerConnection>
     <url>https://github.com/arpnetworking/metrics-generator</url>
-    <tag>generator-1.4.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>
