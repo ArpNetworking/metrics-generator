@@ -67,7 +67,7 @@
 
   <properties>
     <!--Dependency versions-->
-    <commons.version>2.0.5</commons.version>
+    <commons.version>2.0.6</commons.version>
     <commons.math.version>3.6.1</commons.math.version>
     <guava.version>31.1-jre</guava.version>
     <jackson.version>2.13.3</jackson.version>
