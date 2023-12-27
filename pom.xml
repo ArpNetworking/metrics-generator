@@ -70,7 +70,7 @@
     <commons.version>3.0.0</commons.version>
     <commons.math.version>3.6.1</commons.math.version>
     <guava.version>33.0.0-jre</guava.version>
-    <jackson.version>2.16.0</jackson.version>
+    <jackson.version>2.16.1</jackson.version>
     <jsr305.version>3.0.2</jsr305.version>
     <junit.version>4.13.2</junit.version>
     <logback.steno.version>2.1.0</logback.steno.version>
