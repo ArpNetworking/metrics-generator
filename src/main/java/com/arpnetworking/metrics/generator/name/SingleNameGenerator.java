@@ -23,7 +23,7 @@ import org.apache.commons.math3.random.RandomGenerator;
  *
  * @author Brandon Arp (barp at groupon dot com)
  */
-public class SingleNameGenerator implements NameGenerator {
+public final class SingleNameGenerator implements NameGenerator {
     /**
      * Public constructor.
      *

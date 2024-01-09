@@ -28,7 +28,7 @@ import java.util.Set;
  *
  * @author Brandon Arp (barp at groupon dot com)
  */
-public class NameSetGenerator implements NameGenerator {
+public final class NameSetGenerator implements NameGenerator {
     /**
      * Public constructor.
      *
