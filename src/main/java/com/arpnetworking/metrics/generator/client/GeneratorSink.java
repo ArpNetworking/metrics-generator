@@ -45,7 +45,7 @@ import java.util.Map;
  *
  * @author Brandon Arp (barp at groupon dot com)
  */
-public class GeneratorSink implements Sink {
+public final class GeneratorSink implements Sink {
     /**
      * Public constructor.
      *
