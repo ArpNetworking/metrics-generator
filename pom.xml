@@ -129,6 +129,7 @@
               <mainClass>com.arpnetworking.metrics.generator.Generator</mainClass>
             </program>
           </programs>
+          <unixScriptTemplate>${project.build.directory}/appAssemblerUnixBinTemplate</unixScriptTemplate>
         </configuration>
       </plugin>
     </plugins>
