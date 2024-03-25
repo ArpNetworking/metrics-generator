@@ -67,13 +67,13 @@
 
   <properties>
     <!--Dependency versions-->
-    <commons.version>3.1.1</commons.version>
+    <commons.version>3.1.0</commons.version>
     <commons.math.version>3.6.1</commons.math.version>
     <guava.version>33.1.0-jre</guava.version>
     <jackson.version>2.17.0</jackson.version>
     <jsr305.version>3.0.2</jsr305.version>
     <junit.version>4.13.2</junit.version>
-    <logback.steno.version>2.1.1</logback.steno.version>
+    <logback.steno.version>2.1.2</logback.steno.version>
     <metrics.client.version>0.13.0</metrics.client.version>
     <metrics.filesink.extra.version>0.12.1</metrics.filesink.extra.version>
     <oval.version>3.2.1</oval.version>
