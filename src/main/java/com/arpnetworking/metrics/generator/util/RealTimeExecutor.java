@@ -19,6 +19,7 @@ import com.arpnetworking.metrics.MetricsFactory;
 import com.arpnetworking.metrics.generator.client.GeneratorSink;
 import com.arpnetworking.metrics.generator.uow.UnitOfWorkSchedule;
 import com.arpnetworking.metrics.impl.TsdMetricsFactory;
+import com.google.common.collect.Lists;
 
 import java.nio.file.Path;
 import java.time.Instant;
@@ -48,7 +49,7 @@ public class RealTimeExecutor {
             final Path outputPath,
             final String clusterName,
             final String serviceName) {
-        _generators = generators;
+        _generators = Lists.newArrayList(generators);
         _workEntries = new PriorityQueue<>(generators.size(), new WorkItemOrdering());
         _modifyingSink = new GeneratorSink(outputPath, ZonedDateTime.now());
 

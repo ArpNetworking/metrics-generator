@@ -28,6 +28,7 @@ import com.arpnetworking.metrics.generator.uow.UnitOfWorkSchedule;
 import com.arpnetworking.steno.Logger;
 import com.arpnetworking.steno.LoggerFactory;
 import com.google.common.collect.Lists;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.sf.oval.constraint.Min;
 import net.sf.oval.constraint.NotEmpty;
 import net.sf.oval.constraint.NotNull;
@@ -160,6 +161,7 @@ public final class TestFileGenerator {
          * @param random The random generator.
          * @return This builder.
          */
+        @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "we actually want to be able to control the random")
         public Builder setRandom(final RandomGenerator random) {
             _random = random;
             return this;
