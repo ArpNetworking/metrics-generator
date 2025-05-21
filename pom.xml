@@ -84,7 +84,7 @@
     <jacoco.check.branch.coverage>0.29</jacoco.check.branch.coverage>
 
     <!-- Findbugs -->
-    <spotbugs.exclude>${project.basedir}/spotbugs.exclude.xml</spotbugs.exclude>
+    <!--<spotbugs.exclude>${project.basedir}/spotbugs.exclude.xml</spotbugs.exclude>-->
   </properties>
 
   <build>
